@@ -37,8 +37,8 @@ module Hanami2
         loader.tag = "hanami2-controller"
         loader.push_dir("#{root}/hanami", namespace: Hanami2)
         loader.ignore(
-          "#{root}/hanami/controller/version.rb",
-          "#{root}/hanami/action/{constants,errors,validatable}.rb"
+          "#{root}/hanami2/controller/version.rb",
+          "#{root}/hanami2/action/{constants,errors,validatable}.rb"
         )
         loader.inflector.inflect("csrf_protection" => "CSRFProtection")
       end
