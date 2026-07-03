@@ -3,8 +3,8 @@
 require "hanami/router"
 
 module CacheControl
-  class Default < Hanami::Action
-    include Hanami::Action::Cache
+  class Default < Hanami2::Action
+    include Hanami2::Action::Cache
 
     cache_control :public, max_age: 600
 
@@ -12,8 +12,8 @@ module CacheControl
     end
   end
 
-  class Overriding < Hanami::Action
-    include Hanami::Action::Cache
+  class Overriding < Hanami2::Action
+    include Hanami2::Action::Cache
 
     cache_control :public, max_age: 600
 
@@ -22,32 +22,32 @@ module CacheControl
     end
   end
 
-  class Symbol < Hanami::Action
-    include Hanami::Action::Cache
+  class Symbol < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.cache_control :private
     end
   end
 
-  class Symbols < Hanami::Action
-    include Hanami::Action::Cache
+  class Symbols < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.cache_control :private, :no_cache, :no_store
     end
   end
 
-  class Hash < Hanami::Action
-    include Hanami::Action::Cache
+  class Hash < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.cache_control :public, :no_store, max_age: 900, s_maxage: 86_400, min_fresh: 500, max_stale: 700
     end
   end
 
-  class PrivatePublic < Hanami::Action
-    include Hanami::Action::Cache
+  class PrivatePublic < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.cache_control :private, :public
@@ -56,7 +56,7 @@ module CacheControl
 
   class Application
     def initialize
-      routes = Hanami::Router.new do
+      routes = Hanami2::Router.new do
         get "/default",            to: CacheControl::Default.new
         get "/overriding",         to: CacheControl::Overriding.new
         get "/symbol",             to: CacheControl::Symbol.new
@@ -80,7 +80,7 @@ end
 module Web
   module Controllers
     module Home
-      class Index < Hanami::Action
+      class Index < Hanami2::Action
         def handle(*)
         end
       end
@@ -91,7 +91,7 @@ end
 module Admin
   module Controllers
     module Home
-      class Index < Hanami::Action
+      class Index < Hanami2::Action
         def handle(*)
         end
       end
@@ -100,8 +100,8 @@ module Admin
 end
 
 module Expires
-  class Default < Hanami::Action
-    include Hanami::Action::Cache
+  class Default < Hanami2::Action
+    include Hanami2::Action::Cache
 
     expires 900, :public, :no_cache
 
@@ -109,8 +109,8 @@ module Expires
     end
   end
 
-  class Overriding < Hanami::Action
-    include Hanami::Action::Cache
+  class Overriding < Hanami2::Action
+    include Hanami2::Action::Cache
 
     expires 900, :public, :no_cache
 
@@ -119,24 +119,24 @@ module Expires
     end
   end
 
-  class Symbol < Hanami::Action
-    include Hanami::Action::Cache
+  class Symbol < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.expires 900, :private
     end
   end
 
-  class Symbols < Hanami::Action
-    include Hanami::Action::Cache
+  class Symbols < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.expires 900, :private, :no_cache, :no_store
     end
   end
 
-  class Hash < Hanami::Action
-    include Hanami::Action::Cache
+  class Hash < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.expires 900, :public, :no_store, s_maxage: 86_400, min_fresh: 500, max_stale: 700
@@ -145,7 +145,7 @@ module Expires
 
   class Application
     def initialize
-      routes = Hanami::Router.new do
+      routes = Hanami2::Router.new do
         get "/default",              to: Expires::Default.new
         get "/overriding",           to: Expires::Overriding.new
         get "/symbol",               to: Expires::Symbol.new
@@ -166,24 +166,24 @@ module Expires
 end
 
 module ConditionalGet
-  class Etag < Hanami::Action
-    include Hanami::Action::Cache
+  class Etag < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.fresh etag: "updated"
     end
   end
 
-  class LastModified < Hanami::Action
-    include Hanami::Action::Cache
+  class LastModified < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.fresh last_modified: Time.now
     end
   end
 
-  class EtagLastModified < Hanami::Action
-    include Hanami::Action::Cache
+  class EtagLastModified < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.fresh etag: "updated", last_modified: Time.now
@@ -192,7 +192,7 @@ module ConditionalGet
 
   class Application
     def initialize
-      routes = Hanami::Router.new do
+      routes = Hanami2::Router.new do
         get "/etag",                    to: ConditionalGet::Etag.new
         get "/last-modified",           to: ConditionalGet::LastModified.new
         get "/etag-last-modified",      to: ConditionalGet::EtagLastModified.new
@@ -215,16 +215,16 @@ module ConditionalGet
     end
   end
 
-  class LastModifiedNilValue < Hanami::Action
-    include Hanami::Action::Cache
+  class LastModifiedNilValue < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.fresh last_modified: nil
     end
   end
 
-  class EtagNilValue < Hanami::Action
-    include Hanami::Action::Cache
+  class EtagNilValue < Hanami2::Action
+    include Hanami2::Action::Cache
 
     def handle(_, res)
       res.fresh etag: nil

@@ -2,7 +2,7 @@
 
 require "hanami/http/status"
 
-module Hanami
+module Hanami2
   class Action
     # @api private
     # @since 2.0.0

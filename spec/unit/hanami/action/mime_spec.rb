@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   describe "#content_type" do
     it "exposes MIME type" do
       action = CallAction.new

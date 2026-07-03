@@ -3,7 +3,7 @@
 require "rack/utils"
 require "hanami/utils/hash"
 
-module Hanami
+module Hanami2
   class Action
     # A set of HTTP Cookies
     #
@@ -11,7 +11,7 @@ module Hanami
     #
     # @since 0.1.0
     #
-    # @see Hanami::Action::Cookies#cookies
+    # @see Hanami2::Action::Cookies#cookies
     class CookieJar
       # @since 0.4.5
       # @api private
@@ -27,7 +27,7 @@ module Hanami
       # @since 0.1.0
       def initialize(env, headers, default_options)
         @_headers        = headers
-        @cookies         = Utils::Hash.deep_symbolize(extract(env))
+        @cookies         = Hanami::Utils::Hash.deep_symbolize(extract(env))
         @default_options = default_options
       end
 
@@ -38,7 +38,7 @@ module Hanami
       #
       # @since 0.1.0
       #
-      # @see Hanami::Action::Cookies#finish
+      # @see Hanami2::Action::Cookies#finish
       def finish
         @cookies.delete(Action::RACK_SESSION)
         if changed?
@@ -97,8 +97,8 @@ module Hanami
       #
       # @example
       #   require "hanami/controller"
-      #   class MyAction < Hanami::Action
-      #     include Hanami::Action::Cookies
+      #   class MyAction < Hanami2::Action
+      #     include Hanami2::Action::Cookies
       #
       #     def handle(req, res)
       #       # read cookies

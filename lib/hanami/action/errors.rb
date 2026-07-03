@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     # Base class for all Action errors.
     #
@@ -13,7 +13,7 @@ module Hanami
     #
     # @since 2.0.2
     #
-    # @see Hanami::Action::Response#status=
+    # @see Hanami2::Action::Response#status=
     # @see https://guides.hanamirb.org/v2.0/actions/status-codes/
     class UnknownHttpStatusError < Error
       # @since 2.0.2
@@ -26,11 +26,11 @@ module Hanami
     # Unknown format error
     #
     # This error is raised when a action sets a format that it isn't recognized
-    # both by `Hanami::Action::Configuration` and the list of Rack mime types
+    # both by `Hanami2::Action::Configuration` and the list of Rack mime types
     #
     # @since 2.0.0
     #
-    # @see Hanami::Action::Mime#format=
+    # @see Hanami2::Action::Mime#format=
     class UnknownFormatError < Error
       # @since 2.0.0
       # @api private
@@ -61,12 +61,12 @@ module Hanami
     # Error raised when session is accessed but not enabled.
     #
     # This error is raised when `session` or `flash` is accessed/set on request/response objects
-    # in actions which do not include `Hanami::Action::Session`.
+    # in actions which do not include `Hanami2::Action::Session`.
     #
-    # @see Hanami::Action::Session
-    # @see Hanami::Action::Request#session
-    # @see Hanami::Action::Response#session
-    # @see Hanami::Action::Response#flash
+    # @see Hanami2::Action::Session
+    # @see Hanami2::Action::Request#session
+    # @see Hanami2::Action::Response#session
+    # @see Hanami2::Action::Response#flash
     #
     # @api public
     # @since 2.0.0
@@ -80,7 +80,7 @@ module Hanami
           Configure sessions in your Hanami app, e.g.
 
             module MyApp
-              class App < Hanami::App
+              class App < Hanami2::App
                 # See Rack::Session::Cookie for options
                 config.sessions = :cookie, {**cookie_session_options}
               end
@@ -88,7 +88,7 @@ module Hanami
 
           Or include session support directly in your action class:
 
-            include Hanami::Action::Session
+            include Hanami2::Action::Session
         TEXT
       end
     end

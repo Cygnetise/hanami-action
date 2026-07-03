@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     module Cache
       # Module with Expires logic
@@ -42,7 +42,7 @@ module Hanami
         # @since 0.3.0
         # @api private
         #
-        # @see Hanami::Action#finish
+        # @see Hanami2::Action#finish
         def finish(_, res, _)
           unless res.headers.include?(Action::EXPIRES)
             res.headers.merge!(self.class.expires_directives.headers)
@@ -60,7 +60,7 @@ module Hanami
           # @api private
           def initialize(amount, *values)
             @amount = amount
-            @cache_control = Hanami::Action::Cache::CacheControl::Directives.new(*(values << {max_age: amount}))
+            @cache_control = Hanami2::Action::Cache::CacheControl::Directives.new(*(values << {max_age: amount}))
           end
 
           # @since 0.3.0

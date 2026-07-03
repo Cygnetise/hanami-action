@@ -5,7 +5,7 @@ require "rack/utils"
 require "rack/mime"
 require_relative "errors"
 
-module Hanami
+module Hanami2
   class Action
     module Mime # rubocop:disable Metrics/ModuleLength
       # Most commom MIME Types used for responses
@@ -109,7 +109,7 @@ module Hanami
         #
         # @example Unknown format name
         #   detect_format_and_content_type(:unknown, config)
-        #   # raises Hanami::Action::UnknownFormatError
+        #   # raises Hanami2::Action::UnknownFormatError
         #
         # @example Unknown content type
         #   detect_format_and_content_type("application/unknown", config)
@@ -117,7 +117,7 @@ module Hanami
         #
         # @return [Array<(Symbol, String)>]
         #
-        # @raise [Hanami::Action::UnknownFormatError] if an unknown format name is given
+        # @raise [Hanami2::Action::UnknownFormatError] if an unknown format name is given
         #
         # @since 2.0.0
         # @api private
@@ -174,7 +174,7 @@ module Hanami
         # @since 2.0.0
         # @api private
         #
-        # @see http://www.rubydoc.info/gems/rack/Rack/Utils#best_q_match-class_method
+        # @see http://www.rubydoc.info/gems/rack/Rack/Hanami::Utils#best_q_match-class_method
         # @see https://github.com/rack/rack/pull/659
         # @see https://github.com/hanami/controller/issues/59
         # @see https://github.com/hanami/controller/issues/104
@@ -270,7 +270,7 @@ module Hanami
         # @api private
         def format_to_mime_type(format, config)
           config.formats.mime_type_for(format) ||
-            TYPES.fetch(format) { raise Hanami::Action::UnknownFormatError.new(format) }
+            TYPES.fetch(format) { raise Hanami2::Action::UnknownFormatError.new(format) }
         end
 
         # @since 2.0.0

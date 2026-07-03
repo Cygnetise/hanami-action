@@ -12,7 +12,7 @@ require "zeitwerk"
 require_relative "action/constants"
 require_relative "action/errors"
 
-module Hanami
+module Hanami2
   # An HTTP endpoint
   #
   # @since 0.1.0
@@ -20,7 +20,7 @@ module Hanami
   # @example
   #   require "hanami/controller"
   #
-  #   class Show < Hanami::Action
+  #   class Show < Hanami2::Action
   #     def handle(req, res)
   #       # ...
   #     end
@@ -30,14 +30,13 @@ module Hanami
   class Action
     # @since 2.0.0
     # @api private
+
     def self.gem_loader
       @gem_loader ||= Zeitwerk::Loader.new.tap do |loader|
-        root = File.expand_path("..", __dir__)
-        loader.tag = "hanami-controller"
-        loader.inflector = Zeitwerk::GemInflector.new("#{root}/hanami-controller.rb")
-        loader.push_dir(root)
+        root = File.expand_path("..", __dir__) # => lib
+        loader.tag = "hanami2-controller"
+        loader.push_dir("#{root}/hanami", namespace: Hanami2)
         loader.ignore(
-          "#{root}/hanami-controller.rb",
           "#{root}/hanami/controller/version.rb",
           "#{root}/hanami/action/{constants,errors,validatable}.rb"
         )
@@ -70,8 +69,8 @@ module Hanami
       Pathname(File.expand_path(dir || Dir.pwd))
     }
     setting :public_directory, default: Config::DEFAULT_PUBLIC_DIRECTORY
-    setting :before_callbacks, default: Utils::Callbacks::Chain.new, mutable: true
-    setting :after_callbacks, default: Utils::Callbacks::Chain.new, mutable: true
+    setting :before_callbacks, default: Hanami::Utils::Callbacks::Chain.new, mutable: true
+    setting :after_callbacks, default: Hanami::Utils::Callbacks::Chain.new, mutable: true
     setting :contract_class
 
     # @!scope class
@@ -80,7 +79,7 @@ module Hanami
     #   Returns the action's config. Use this to configure your action.
     #
     #   @example Access inside class body
-    #     class Show < Hanami::Action
+    #     class Show < Hanami2::Action
     #       config.format :json
     #     end
     #
@@ -92,7 +91,7 @@ module Hanami
     # @!scope instance
 
     # Override Ruby's hook for modules.
-    # It includes basic Hanami::Action modules to the given class.
+    # It includes basic Hanami2::Action modules to the given class.
     #
     # @param subclass [Class] the target action
     #
@@ -147,12 +146,12 @@ module Hanami
     #
     #   @since 0.3.2
     #
-    #   @see Hanami::Action::Callbacks::ClassMethods#append_after
+    #   @see Hanami2::Action::Callbacks::ClassMethods#append_after
     #
     #   @example Method names (symbols)
     #     require "hanami/controller"
     #
-    #     class Show < Hanami::Action
+    #     class Show < Hanami2::Action
     #       before :authenticate, :set_article
     #
     #       def handle(req, res)
@@ -178,7 +177,7 @@ module Hanami
     #   @example Anonymous functions (Procs)
     #     require "hanami/controller"
     #
-    #     class Show < Hanami::Action
+    #     class Show < Hanami2::Action
     #       before { ... } # 1 do some authentication stuff
     #       before {|req, res| @article = Article.find params[:id] } # 2
     #
@@ -215,7 +214,7 @@ module Hanami
     #
     #   @since 0.3.2
     #
-    #   @see Hanami::Action::Callbacks::ClassMethods#append_before
+    #   @see Hanami2::Action::Callbacks::ClassMethods#append_before
     def self.append_after(...)
       config.after_callbacks.append(...)
     end
@@ -240,7 +239,7 @@ module Hanami
     #
     #   @since 0.3.2
     #
-    #   @see Hanami::Action::Callbacks::ClassMethods#prepend_after
+    #   @see Hanami2::Action::Callbacks::ClassMethods#prepend_after
     def self.prepend_before(...)
       config.before_callbacks.prepend(...)
     end
@@ -260,7 +259,7 @@ module Hanami
     #
     #   @since 0.3.2
     #
-    #   @see Hanami::Action::Callbacks::ClassMethods#prepend_before
+    #   @see Hanami2::Action::Callbacks::ClassMethods#prepend_before
     def self.prepend_after(...)
       config.after_callbacks.prepend(...)
     end
@@ -299,7 +298,7 @@ module Hanami
       freeze
     end
 
-    # Implements the Rack/Hanami::Action protocol
+    # Implements the Rack/Hanami2::Action protocol
     #
     # @since 0.1.0
     # @api private
@@ -343,8 +342,8 @@ module Hanami
 
     # Hook for subclasses to apply behavior as part of action invocation
     #
-    # @param request [Hanami::Action::Request]
-    # @param response [Hanami::Action::Response]
+    # @param request [Hanami2::Action::Request]
+    # @param response [Hanami2::Action::Response]
     #
     # @since 2.0.0
     # @api public
@@ -368,13 +367,13 @@ module Hanami
     #
     # @since 0.2.0
     #
-    # @see Hanami::Action::Throwable#handle_exception
-    # @see Hanami::Http::Status:ALL
+    # @see Hanami2::Action::Throwable#handle_exception
+    # @see Hanami2::Http::Status:ALL
     #
     # @example Basic usage
     #   require "hanami/controller"
     #
-    #   class Show < Hanami::Action
+    #   class Show < Hanami2::Action
     #     def handle(*)
     #       halt 404
     #     end
@@ -385,7 +384,7 @@ module Hanami
     # @example Custom message
     #   require "hanami/controller"
     #
-    #   class Show < Hanami::Action
+    #   class Show < Hanami2::Action
     #     def handle(*)
     #       halt 404, "This is not the droid you're looking for."
     #     end
@@ -434,7 +433,7 @@ module Hanami
       false
     end
 
-    # Hook to be overridden by `Hanami::Extensions::Action` for integrated actions
+    # Hook to be overridden by `Hanami2::Extensions::Action` for integrated actions
     #
     # @since 2.0.0
     # @api private
@@ -442,7 +441,7 @@ module Hanami
       Request.new(**options)
     end
 
-    # Hook to be overridden by `Hanami::Extensions::Action` for integrated actions
+    # Hook to be overridden by `Hanami2::Extensions::Action` for integrated actions
     #
     # @since 2.0.0
     # @api private
@@ -517,7 +516,7 @@ module Hanami
     # For instance, a <tt>204</tt> doesn't allow <tt>Content-Type</tt> or any
     # other custom header.
     #
-    # This restriction is enforced by <tt>Hanami::Action#_requires_no_body?</tt>.
+    # This restriction is enforced by <tt>Hanami2::Action#_requires_no_body?</tt>.
     #
     # However, there are cases that demand to bypass this rule to set meta
     # informations via headers.
@@ -528,13 +527,13 @@ module Hanami
     #
     # @since 0.5.0
     #
-    # @see Hanami::Action#_requires_no_body?
+    # @see Hanami2::Action#_requires_no_body?
     #
     # @example
     #   require "hanami/controller"
     #
     #   module Books
-    #     class Destroy < Hanami::Action
+    #     class Destroy < Hanami2::Action
     #       def handle(*, res)
     #         # ...
     #         res.headers.merge!(
@@ -584,9 +583,9 @@ module Hanami
     # @api private
     # @abstract
     #
-    # @see Hanami::Action::Session#finish
-    # @see Hanami::Action::Cookies#finish
-    # @see Hanami::Action::Cache#finish
+    # @see Hanami2::Action::Session#finish
+    # @see Hanami2::Action::Cookies#finish
+    # @see Hanami2::Action::Cache#finish
     def finish(req, res, halted)
       res.status, res.body = *halted unless halted.nil?
 

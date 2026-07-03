@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Response, "status codes" do
+RSpec.describe Hanami2::Action::Response, "status codes" do
   subject(:response) {
     described_class.new(
       env: rack_env,
       request: request,
-      config: Hanami::Action.config.dup
+      config: Hanami2::Action.config.dup
     )
   }
   let(:request) {
-    Hanami::Action::Request.new(env: rack_env, params: {}, session_enabled: true)
+    Hanami2::Action::Request.new(env: rack_env, params: {}, session_enabled: true)
   }
   let(:rack_env) {
     Rack::MockRequest.env_for("http://example.com/foo?q=bar")
@@ -25,11 +25,11 @@ RSpec.describe Hanami::Action::Response, "status codes" do
     expect(response.status).to eql 422
   end
 
-  it "raises Hanami::Action::UnknownHttpStatusError if given an unrecognized integer status" do
-    expect { response.status = 999 }.to raise_error(Hanami::Action::UnknownHttpStatusError)
+  it "raises Hanami2::Action::UnknownHttpStatusError if given an unrecognized integer status" do
+    expect { response.status = 999 }.to raise_error(Hanami2::Action::UnknownHttpStatusError)
   end
 
-  it "raises Hanami::Action::UnknownHttpStatusError if given an unrecognized symbolic status" do
-    expect { response.status = :invalid_status }.to raise_error(Hanami::Action::UnknownHttpStatusError)
+  it "raises Hanami2::Action::UnknownHttpStatusError if given an unrecognized symbolic status" do
+    expect { response.status = :invalid_status }.to raise_error(Hanami2::Action::UnknownHttpStatusError)
   end
 end

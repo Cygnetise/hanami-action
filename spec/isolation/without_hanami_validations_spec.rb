@@ -7,13 +7,13 @@ RSpec.describe "Without validations" do
     expect(defined?(Hanami::Validations)).to be(nil)
   end
 
-  it "doesn't load Hanami::Action::Validatable" do
-    expect(defined?(Hanami::Action::Validatable)).to be(nil)
+  it "doesn't load Hanami2::Action::Validatable" do
+    expect(defined?(Hanami2::Action::Validatable)).to be(nil)
   end
 
-  it "doesn't have Hanami::Action.params" do
+  it "doesn't have Hanami2::Action.params" do
     expect do
-      Class.new(Hanami::Action) do
+      Class.new(Hanami2::Action) do
         params do
           required(:id).filled
         end
@@ -24,9 +24,9 @@ RSpec.describe "Without validations" do
     )
   end
 
-  it "doesn't have Hanami::Action.contract" do
+  it "doesn't have Hanami2::Action.contract" do
     expect do
-      Class.new(Hanami::Action) do
+      Class.new(Hanami2::Action) do
         contract do
           params do
             required(:id).filled
@@ -39,9 +39,9 @@ RSpec.describe "Without validations" do
     )
   end
 
-  it "doesn't have Hanami::Action::Params.params" do
+  it "doesn't have Hanami2::Action::Params.params" do
     expect do
-      Class.new(Hanami::Action::Params) do
+      Class.new(Hanami2::Action::Params) do
         params do
           required(:id).filled
         end
@@ -53,7 +53,7 @@ RSpec.describe "Without validations" do
   end
 
   it "has params that are always valid" do
-    action = Class.new(Hanami::Action) do
+    action = Class.new(Hanami2::Action) do
       def handle(req, res)
         res.body = [req.params.respond_to?(:valid?), req.params.valid?]
       end

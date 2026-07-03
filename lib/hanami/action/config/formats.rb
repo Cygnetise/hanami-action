@@ -3,7 +3,7 @@
 require "hanami/utils/kernel"
 require "dry/core"
 
-module Hanami
+module Hanami2
   class Action
     class Config
       # Action format configuration.
@@ -55,7 +55,7 @@ module Hanami
         #   @since 2.0.0
         #   @api public
         def values=(formats)
-          @values = formats.map { |f| Utils::Kernel.Symbol(f) }
+          @values = formats.map { |f| Hanami::Utils::Kernel.Symbol(f) }
         end
 
         # @overload add(format)
@@ -90,10 +90,10 @@ module Hanami
         # @since 2.0.0
         # @api public
         def add(format, mime_types = [])
-          format = Utils::Kernel.Symbol(format)
+          format = Hanami::Utils::Kernel.Symbol(format)
 
           Array(mime_types).each do |mime_type|
-            @mapping[Utils::Kernel.String(mime_type)] = format
+            @mapping[Hanami::Utils::Kernel.String(mime_type)] = format
           end
 
           @values << format unless @values.include?(format)

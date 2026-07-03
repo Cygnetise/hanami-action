@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     # Cache type API
     #
     # @since 0.3.0
     #
-    # @see Hanami::Action::Cache::ClassMethods#cache_control
-    # @see Hanami::Action::Cache::ClassMethods#expires
-    # @see Hanami::Action::Cache::ClassMethods#fresh
+    # @see Hanami2::Action::Cache::ClassMethods#cache_control
+    # @see Hanami2::Action::Cache::ClassMethods#expires
+    # @see Hanami2::Action::Cache::ClassMethods#fresh
     module Cache
       # Override Ruby's hook for modules.
       # It includes exposures logic

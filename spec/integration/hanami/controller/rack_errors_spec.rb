@@ -29,26 +29,26 @@ ConfigurationHandledExceptionSubclass = Class.new(ConfigurationHandledException)
 
 module Errors
   # Unhandled
-  class WithoutMessage < Hanami::Action
+  class WithoutMessage < Hanami2::Action
     def handle(*)
       raise UnhandledException
     end
   end
 
-  class WithMessage < Hanami::Action
+  class WithMessage < Hanami2::Action
     def handle(*)
       raise UnhandledExceptionWithMessage, "boom"
     end
   end
 
-  class WithCustomMessage < Hanami::Action
+  class WithCustomMessage < Hanami2::Action
     def handle(*)
       raise UnhandledExceptionWithCustomMessage, "nope"
     end
   end
 
   # Handled
-  class ActionHandled < Hanami::Action
+  class ActionHandled < Hanami2::Action
     handle_exception HandledException => 400
 
     def handle(*)
@@ -56,7 +56,7 @@ module Errors
     end
   end
 
-  class ActionHandledSubclass < Hanami::Action
+  class ActionHandledSubclass < Hanami2::Action
     handle_exception HandledException => 400
 
     def handle(*)
@@ -64,7 +64,7 @@ module Errors
     end
   end
 
-  class ConfigurationHandled < Hanami::Action
+  class ConfigurationHandled < Hanami2::Action
     handle_exception ConfigurationHandledException => 500
 
     def handle(*)
@@ -72,7 +72,7 @@ module Errors
     end
   end
 
-  class ConfigurationHandledSubclass < Hanami::Action
+  class ConfigurationHandledSubclass < Hanami2::Action
     handle_exception ConfigurationHandledException => 500
 
     def handle(*)
@@ -82,7 +82,7 @@ module Errors
 
   class Application
     def initialize
-      routes = Hanami::Router.new do
+      routes = Hanami2::Router.new do
         get "/without_message",     to: Errors::WithoutMessage.new
         get "/with_message",        to: Errors::WithMessage.new
         get "/with_custom_message", to: Errors::WithCustomMessage.new

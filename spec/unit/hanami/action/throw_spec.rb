@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   describe ".handle_exception" do
     it "handle an exception with the given status" do
       response = HandledExceptionAction.new.call({})

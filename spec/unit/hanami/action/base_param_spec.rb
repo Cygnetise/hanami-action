@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # TODO: merge these tests into params_spec
-RSpec.describe Hanami::Action::Params do
+RSpec.describe Hanami2::Action::Params do
   let(:action) { Test::Index.new }
 
   describe "#initialize" do

@@ -2,9 +2,9 @@
 
 require "rack"
 
-RSpec.describe Hanami::Action::Params do
+RSpec.describe Hanami2::Action::Params do
   describe "#raw" do
-    let(:params) { Class.new(Hanami::Action::Params) }
+    let(:params) { Class.new(Hanami2::Action::Params) }
 
     context "when this feature isn't enabled" do
       let(:action) { ParamsAction.new }
@@ -47,14 +47,14 @@ RSpec.describe Hanami::Action::Params do
   end
 
   describe "whitelisting" do
-    let(:params) { Class.new(Hanami::Action::Params) }
+    let(:params) { Class.new(Hanami2::Action::Params) }
 
     context "when this feature isn't enabled" do
       let(:action) { ParamsAction.new }
 
       it "creates a Params innerclass" do
         expect(defined?(ParamsAction::Params)).to eq("constant")
-        expect(ParamsAction::Params.ancestors).to include(Hanami::Action::Params)
+        expect(ParamsAction::Params.ancestors).to include(Hanami2::Action::Params)
       end
 
       context "in testing mode" do
@@ -74,9 +74,9 @@ RSpec.describe Hanami::Action::Params do
         end
       end
 
-      context "with Hanami::Router" do
+      context "with Hanami2::Router" do
         it "returns all the params as they are" do
-          # Hanami::Router params are always symbolized
+          # Hanami2::Router params are always symbolized
           response = action.call("router.params" => {id: "23"})
           expect(response.body).to eq([%({:id=>"23"})])
         end
@@ -114,7 +114,7 @@ RSpec.describe Hanami::Action::Params do
           end
         end
 
-        context "with Hanami::Router" do
+        context "with Hanami2::Router" do
           it "returns only the listed params" do
             response = action.call("router.params" => {id: 23, another: "x"})
             expect(response.body).to eq([%({:id=>23})])
@@ -127,7 +127,7 @@ RSpec.describe Hanami::Action::Params do
 
         it "creates a Params innerclass" do
           expect(defined?(WhitelistedDslAction::Params)).to eq("constant")
-          expect(WhitelistedDslAction::Params.ancestors).to include(Hanami::Action::Params)
+          expect(WhitelistedDslAction::Params.ancestors).to include(Hanami2::Action::Params)
         end
 
         context "in testing mode" do
@@ -144,7 +144,7 @@ RSpec.describe Hanami::Action::Params do
           end
         end
 
-        context "with Hanami::Router" do
+        context "with Hanami2::Router" do
           it "returns only the listed params" do
             response = action.call("router.params" => {username: "jodosha", y: "x"})
             expect(response.body).to eq([%({:username=>"jodosha"})])
@@ -481,8 +481,8 @@ RSpec.describe Hanami::Action::Params do
 
     let(:params) { klass.new(env: {book: {code: "abc"}}) }
 
-    it "returns Hanami::Action::Params::Errors" do
-      expect(params.errors).to be_kind_of(Hanami::Action::Params::Errors)
+    it "returns Hanami2::Action::Params::Errors" do
+      expect(params.errors).to be_kind_of(Hanami2::Action::Params::Errors)
     end
 
     it "alters the returning value of #valid?" do

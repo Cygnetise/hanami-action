@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Rack do
+RSpec.describe Hanami2::Action::Rack do
   let(:action) { MethodInspectionAction.new }
 
   %w[GET POST PATCH PUT DELETE TRACE OPTIONS].each do |verb|

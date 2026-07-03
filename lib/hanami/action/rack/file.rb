@@ -2,7 +2,7 @@
 
 require "rack/file"
 
-module Hanami
+module Hanami2
   class Action
     # Rack extensions for actions.
     #
@@ -11,7 +11,7 @@ module Hanami
     module Rack
       # File to be sent
       #
-      # @see Hanami::Action::Response#send_file
+      # @see Hanami2::Action::Response#send_file
       #
       # @since 0.4.3
       # @api private

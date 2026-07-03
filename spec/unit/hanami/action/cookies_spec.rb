@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   describe "#cookies" do
     it "gets cookies" do
       action = GetCookiesAction.new

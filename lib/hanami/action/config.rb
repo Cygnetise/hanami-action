@@ -2,11 +2,11 @@
 
 require "dry/configurable"
 
-module Hanami
+module Hanami2
   class Action
-    # Config for `Hanami::Action` classes.
+    # Config for `Hanami2::Action` classes.
     #
-    # @see Hanami::Action.config
+    # @see Hanami2::Action.config
     #
     # @api public
     # @since 2.0.0
@@ -98,7 +98,7 @@ module Hanami
       #
       #   @return [String]
       #
-      #   @see Hanami::Action::Mime
+      #   @see Hanami2::Action::Mime
       #
       #   @since 0.3.0
 

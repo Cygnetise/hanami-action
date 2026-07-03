@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   class FormatController
-    class Lookup < Hanami::Action
+    class Lookup < Hanami2::Action
       def handle(*)
       end
     end
 
-    class Custom < Hanami::Action
+    class Custom < Hanami2::Action
       def handle(req, res)
         input = req.params[:format]
         input = input.to_sym unless input.nil?
@@ -16,7 +16,7 @@ RSpec.describe Hanami::Action do
       end
     end
 
-    class Configuration < Hanami::Action
+    class Configuration < Hanami2::Action
       config.format :jpg
 
       def handle(*, res)
@@ -73,7 +73,7 @@ RSpec.describe Hanami::Action do
       expect(response.status).to                  be(200)
     end
 
-    Hanami::Action::Mime::TYPES.each do |format, mime_type|
+    Hanami2::Action::Mime::TYPES.each do |format, mime_type|
       it "accepts '#{mime_type}' and returns :#{format}" do
         response = action.call("HTTP_ACCEPT" => mime_type)
 
@@ -101,7 +101,7 @@ RSpec.describe Hanami::Action do
       MSG
 
       expect { action.call(format: nil) }.to raise_error do |exception|
-        expect(exception).to         be_kind_of(Hanami::Action::UnknownFormatError)
+        expect(exception).to         be_kind_of(Hanami2::Action::UnknownFormatError)
         expect(exception.message).to eq(expected_message)
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe Hanami::Action do
       MSG
 
       expect { action.call(format: "") }.to raise_error do |exception|
-        expect(exception).to         be_kind_of(Hanami::Action::UnknownFormatError)
+        expect(exception).to         be_kind_of(Hanami2::Action::UnknownFormatError)
         expect(exception.message).to eq(expected_message)
       end
     end
@@ -127,12 +127,12 @@ RSpec.describe Hanami::Action do
       MSG
 
       expect { action.call(format: :unknown) }.to raise_error do |exception|
-        expect(exception).to         be_kind_of(Hanami::Action::UnknownFormatError)
+        expect(exception).to         be_kind_of(Hanami2::Action::UnknownFormatError)
         expect(exception.message).to eq(expected_message)
       end
     end
 
-    Hanami::Action::Mime::TYPES.each do |format, mime_type|
+    Hanami2::Action::Mime::TYPES.each do |format, mime_type|
       it "sets #{format} and returns '#{mime_type}'" do
         response = action.call(format: format)
 

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Response, "view rendering" do
+RSpec.describe Hanami2::Action::Response, "view rendering" do
   describe "#render" do
     subject(:response) {
       described_class.new(
         request: request,
-        config: Hanami::Action.config.dup, env: env,
+        config: Hanami2::Action.config.dup, env: env,
         view_options: view_options
       )
     }
@@ -77,7 +77,7 @@ RSpec.describe Hanami::Action::Response, "view rendering" do
     subject {
       described_class.new(
         request: double(:request),
-        config: Hanami::Action.config.dup, env: env
+        config: Hanami2::Action.config.dup, env: env
       )
     }
     let(:env) { {"REQUEST_METHOD" => "GET"} }
@@ -136,7 +136,7 @@ RSpec.describe Hanami::Action::Response, "view rendering" do
     subject {
       described_class.new(
         request: double(:request),
-        config: Hanami::Action.config.dup, env: env
+        config: Hanami2::Action.config.dup, env: env
       )
     }
     let(:env) { {"REQUEST_METHOD" => "GET"} }

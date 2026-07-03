@@ -2,7 +2,7 @@
 
 require "rack/utils"
 
-module Hanami
+module Hanami2
   # @since 0.1.0
   # @api private
   module Http
@@ -29,7 +29,7 @@ module Hanami
       #
       # @return [Array] a pair of code and message for an HTTP status
       #
-      # @raise [Hanami::Action::UnknownHttpStatusError] if the given code
+      # @raise [Hanami2::Action::UnknownHttpStatusError] if the given code
       #   cannot be associated to a known HTTP status
       #
       # @since 0.1.0
@@ -40,30 +40,30 @@ module Hanami
       # @example Integer HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.for_code(401)
+      #   Hanami2::Http::Status.for_code(401)
       #     # => [401, "Unauthorized"]
       #
       # @example Symbol HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.for_code(:unauthorized)
+      #   Hanami2::Http::Status.for_code(:unauthorized)
       #     # => [401, "Unauthorized"]
       #
       # @example Unknown HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.for_code(999)
-      #     # => raise Hanami::Action::UnknownHttpStatusError
+      #   Hanami2::Http::Status.for_code(999)
+      #     # => raise Hanami2::Action::UnknownHttpStatusError
       #
-      #   Hanami::Http::Status.for_code(:foo)
-      #     # => raise Hanami::Action::UnknownHttpStatusError
+      #   Hanami2::Http::Status.for_code(:foo)
+      #     # => raise Hanami2::Action::UnknownHttpStatusError
       def self.for_code(code)
         case code
         when Integer
           ALL.assoc(code)
         when Symbol
           ALL.assoc(SYMBOLS[code])
-        end or raise ::Hanami::Action::UnknownHttpStatusError.new(code)
+        end or raise ::Hanami2::Action::UnknownHttpStatusError.new(code)
       end
 
       # Return a status code for the given code
@@ -72,7 +72,7 @@ module Hanami
       #
       # @return [Integer] a message for the given status code
       #
-      # @raise [Hanami::Action::UnknownHttpStatusError] if the given code
+      # @raise [Hanami2::Action::UnknownHttpStatusError] if the given code
       #   cannot be associated to a known HTTP status
       #
       # @see https://guides.hanamirb.org/v2.0/actions/status-codes/
@@ -83,23 +83,23 @@ module Hanami
       # @example Integer HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.lookup(401)
+      #   Hanami2::Http::Status.lookup(401)
       #     # => 401
       #
       # @example Symbol HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.lookup(:unauthorized)
+      #   Hanami2::Http::Status.lookup(:unauthorized)
       #     # => 401
       #
       # @example Unknown HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.lookup(999)
-      #     # => raise Hanami::Action::UnknownHttpStatusError
+      #   Hanami2::Http::Status.lookup(999)
+      #     # => raise Hanami2::Action::UnknownHttpStatusError
       #
-      #   Hanami::Http::Status.lookup(:foo)
-      #     # => raise Hanami::Action::UnknownHttpStatusError
+      #   Hanami2::Http::Status.lookup(:foo)
+      #     # => raise Hanami2::Action::UnknownHttpStatusError
       def self.lookup(code)
         for_code(code)[0]
       end
@@ -110,7 +110,7 @@ module Hanami
       #
       # @return [String] a message for the given status code
       #
-      # @raise [Hanami::Action::UnknownHttpStatusError] if the given code
+      # @raise [Hanami2::Action::UnknownHttpStatusError] if the given code
       #   cannot be associated to a known HTTP status
       #
       # @see https://guides.hanamirb.org/v2.0/actions/status-codes/
@@ -121,23 +121,23 @@ module Hanami
       # @example Integer HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.message_for(401)
+      #   Hanami2::Http::Status.message_for(401)
       #     # => "Unauthorized"
       #
       # @example Symbol HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.message_for(:unauthorized)
+      #   Hanami2::Http::Status.message_for(:unauthorized)
       #     # => "Unauthorized"
       #
       # @example Unknown HTTP Status
       #   require "hanami/http/status"
       #
-      #   Hanami::Http::Status.message_for(999)
-      #     # => raise Hanami::Action::UnknownHttpStatusError
+      #   Hanami2::Http::Status.message_for(999)
+      #     # => raise Hanami2::Action::UnknownHttpStatusError
       #
-      #   Hanami::Http::Status.message_for(:foo)
-      #     # => raise Hanami::Action::UnknownHttpStatusError
+      #   Hanami2::Http::Status.message_for(:foo)
+      #     # => raise Hanami2::Action::UnknownHttpStatusError
       def self.message_for(code)
         for_code(code)[1]
       end

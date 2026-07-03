@@ -5,8 +5,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "hanami/controller/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "hanami-controller"
-  spec.version       = Hanami::Controller::VERSION
+  spec.name          = "hanami2-controller"
+  spec.version       = Hanami2::Controller::VERSION
   spec.authors       = ["Luca Guidi"]
   spec.email         = ["me@lucaguidi.com"]
   spec.description   = "Complete, fast and testable actions for Rack"

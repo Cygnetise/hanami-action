@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     module Cache
       # Cache-Control directives which have values

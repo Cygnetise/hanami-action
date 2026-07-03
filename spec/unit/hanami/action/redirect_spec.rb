@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   describe "#redirect" do
     it "redirects to the given path" do
       action   = RedirectAction.new

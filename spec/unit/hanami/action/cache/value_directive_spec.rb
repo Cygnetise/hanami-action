@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Cache::ValueDirective do
+RSpec.describe Hanami2::Action::Cache::ValueDirective do
   describe "#to_str" do
     it "returns as http cache format" do
       subject = described_class.new(:max_age, 600)

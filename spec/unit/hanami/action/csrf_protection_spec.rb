@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::CSRFProtection do
+RSpec.describe Hanami2::Action::CSRFProtection do
   subject(:action) {
-    Class.new(Hanami::Action) {
-      include Hanami::Action::CSRFProtection
+    Class.new(Hanami2::Action) {
+      include Hanami2::Action::CSRFProtection
     }.new
   }
 
@@ -19,13 +19,13 @@ RSpec.describe Hanami::Action::CSRFProtection do
         let(:request) { super().merge(_csrf_token: "non-matching") }
 
         it "rejects the request" do
-          expect { response }.to raise_error Hanami::Action::InvalidCSRFTokenError
+          expect { response }.to raise_error Hanami2::Action::InvalidCSRFTokenError
         end
       end
 
       context "missing CSRF token in request" do
         it "rejects the request" do
-          expect { response }.to raise_error Hanami::Action::InvalidCSRFTokenError
+          expect { response }.to raise_error Hanami2::Action::InvalidCSRFTokenError
         end
       end
     end
@@ -47,20 +47,20 @@ RSpec.describe Hanami::Action::CSRFProtection do
         let(:request) { super().merge(_csrf_token: "non-matching") }
 
         it "rejects the request" do
-          expect { response }.to raise_error Hanami::Action::InvalidCSRFTokenError
+          expect { response }.to raise_error Hanami2::Action::InvalidCSRFTokenError
         end
       end
 
       context "missing CSRF token in request" do
         it "rejects the request" do
-          expect { response }.to raise_error Hanami::Action::InvalidCSRFTokenError
+          expect { response }.to raise_error Hanami2::Action::InvalidCSRFTokenError
         end
       end
 
       context "CSRF checks skipped" do
         subject(:action) {
-          Class.new(Hanami::Action) {
-            include Hanami::Action::CSRFProtection
+          Class.new(Hanami2::Action) {
+            include Hanami2::Action::CSRFProtection
 
             def verify_csrf_token?(_req, _res)
               false

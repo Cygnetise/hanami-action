@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Flash do
+RSpec.describe Hanami2::Action::Flash do
   let(:flash) { described_class.new(input_hash) }
   let(:input_hash) { {} }
 

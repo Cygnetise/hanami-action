@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   describe ".before" do
     it "invokes the method(s) from the given symbol(s) before the action is run" do
       action = BeforeMethodAction.new
@@ -8,7 +8,7 @@ RSpec.describe Hanami::Action do
 
       expect(response[:article]).to          eq("Bonjour!".reverse)
       expect(response[:logger].join(" ")).to eq("Mr. John Doe")
-      expect(response[:arguments]).to        eq(["Hanami::Action::Request", "Hanami::Action::Response"])
+      expect(response[:arguments]).to        eq(["Hanami2::Action::Request", "Hanami2::Action::Response"])
     end
 
     it "invokes the given block before the action is run" do
@@ -16,7 +16,7 @@ RSpec.describe Hanami::Action do
       response = action.call({})
 
       expect(response[:article]).to   eq("Good morning!".reverse)
-      expect(response[:arguments]).to eq(["Hanami::Action::Request", "Hanami::Action::Response"])
+      expect(response[:arguments]).to eq(["Hanami2::Action::Request", "Hanami2::Action::Response"])
     end
   end
 end

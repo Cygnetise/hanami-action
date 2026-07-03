@@ -3,7 +3,7 @@
 require "rack/request"
 require "hanami/utils/hash"
 
-module Hanami
+module Hanami2
   class Action
     # Provides access to params included in a Rack request.
     #
@@ -11,17 +11,17 @@ module Hanami
     #
     # These params are available via {Request#params}.
     #
-    # This class is used by default when {Hanami::Action::Validatable} is not included, or when no
+    # This class is used by default when {Hanami2::Action::Validatable} is not included, or when no
     # {Validatable::ClassMethods#params params} validation schema is defined.
     #
-    # @see Hanami::Action::Request#params
+    # @see Hanami2::Action::Request#params
 
     # A set of params requested by the client
     #
     # It's able to extract the relevant params from a Rack env of from an Hash.
     #
     # There are three scenarios:
-    #   * When used with Hanami::Router: it contains only the params from the request
+    #   * When used with Hanami2::Router: it contains only the params from the request
     #   * When used standalone: it contains all the Rack env
     #   * Default: it returns the given hash as it is. It's useful for testing purposes.
     #
@@ -38,7 +38,7 @@ module Hanami
         def self.call(attrs) = Result.new(attrs)
 
         class Result
-          def initialize(attrs) = @attrs = Utils::Hash.deep_symbolize(attrs)
+          def initialize(attrs) = @attrs = Hanami::Utils::Hash.deep_symbolize(attrs)
           def to_h = @attrs
           def errors = {}
         end
@@ -76,7 +76,7 @@ module Hanami
         # @example Basic usage
         #   require "hanami/controller"
         #
-        #   class MyAction < Hanami::Action
+        #   class MyAction < Hanami2::Action
         #     params do
         #       required(:book).schema do
         #         required(:isbn).filled(:str?)
@@ -88,7 +88,7 @@ module Hanami
         #       return unless req.params.valid?
         #
         #       BookRepository.new.create(req.params[:book])
-        #     rescue Hanami::Model::UniqueConstraintViolationError
+        #     rescue Hanami2::Model::UniqueConstraintViolationError
         #       # 2. Add an error in case the record wasn't unique
         #       req.params.errors.add(:book, :isbn, "is not unique")
         #     end
@@ -97,7 +97,7 @@ module Hanami
         # @example Invalid argument
         #   require "hanami/controller"
         #
-        #   class MyAction < Hanami::Action
+        #   class MyAction < Hanami2::Action
         #     params do
         #       required(:book).schema do
         #         required(:title).filled(:str?)
@@ -235,7 +235,7 @@ module Hanami
       #   require "hanami/controller"
       #
       #   module Deliveries
-      #     class Create < Hanami::Action
+      #     class Create < Hanami2::Action
       #       def handle(req, *)
       #         req.params.get(:customer_name)     # => "Luca"
       #         req.params.get(:uknown)            # => nil
@@ -282,7 +282,7 @@ module Hanami
       #          ]
       def error_messages(error_set = errors)
         error_set.each_with_object([]) do |(key, messages), result|
-          k = Utils::String.titleize(key)
+          k = Hanami::Utils::String.titleize(key)
 
           msgs = if messages.is_a?(::Hash)
                    error_messages(messages)
@@ -364,7 +364,7 @@ module Hanami
       def _router_params(fallback = {})
         env.fetch(ROUTER_PARAMS) do
           if session = fallback.delete(Action::RACK_SESSION)
-            fallback[Action::RACK_SESSION] = Utils::Hash.deep_symbolize(session)
+            fallback[Action::RACK_SESSION] = Hanami::Utils::Hash.deep_symbolize(session)
           end
 
           fallback

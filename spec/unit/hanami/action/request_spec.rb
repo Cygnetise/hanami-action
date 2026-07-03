@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Request do
+RSpec.describe Hanami2::Action::Request do
   describe "#body" do
     it "exposes the raw body of the request" do
       body    = build_request(input: "This is the body").body

@@ -6,10 +6,10 @@ require "hanami/controller/version"
 # Hanami
 #
 # @since 0.1.0
-module Hanami
+module Hanami2
   # A set of logically grouped actions
   #
-  # @see Hanami::Action
+  # @see Hanami2::Action
   #
   # @since 0.1.0
   # @api public

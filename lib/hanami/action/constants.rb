@@ -2,7 +2,7 @@
 
 require "rack"
 
-module Hanami
+module Hanami2
   class Action
     # Rack SPEC response code
     #
@@ -172,7 +172,7 @@ module Hanami
     # @since 0.5.0
     # @api private
     #
-    # @see Hanami::Action::Throwable::RACK_ERRORS
+    # @see Hanami2::Action::Throwable::RACK_ERRORS
     # @see http://www.rubydoc.info/github/rack/rack/file/SPEC#The_Error_Stream
     # @see https://github.com/hanami/controller/issues/133
     RACK_EXCEPTION = "rack.exception"
@@ -230,7 +230,7 @@ module Hanami
     RACK_INPUT = ::Rack::RACK_INPUT
 
     # The key that returns router params from the Rack env
-    # This is a builtin integration for Hanami::Router
+    # This is a builtin integration for Hanami2::Router
     #
     # @since 2.0.0
     # @api private

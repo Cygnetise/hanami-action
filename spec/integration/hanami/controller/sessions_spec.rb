@@ -8,7 +8,7 @@ RSpec.describe "HTTP sessions" do
   include Rack::Test::Methods
 
   let(:router) do
-    Hanami::Router.new do
+    Hanami2::Router.new do
       get    "/",       to: Dashboard::Index.new
       post   "/login",  to: Sessions::Create.new
       delete "/logout", to: Sessions::Destroy.new
@@ -55,9 +55,9 @@ RSpec.describe "HTTP sessions" do
   end
 
   context "when sessions not enabled" do
-    it "raises Hanami::Action::MissingSessionError" do
-      expected = Hanami::Action::MissingSessionError
-      expect { get "/disabled" }.to raise_error(expected, /Hanami::Action::Response#session/)
+    it "raises Hanami2::Action::MissingSessionError" do
+      expected = Hanami2::Action::MissingSessionError
+      expect { get "/disabled" }.to raise_error(expected, /Hanami2::Action::Response#session/)
     end
   end
 end

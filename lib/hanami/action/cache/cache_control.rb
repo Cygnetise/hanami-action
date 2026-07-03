@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     module Cache
       # Module with Cache-Control logic
@@ -42,7 +42,7 @@ module Hanami
         # @since 0.3.0
         # @api private
         #
-        # @see Hanami::Action#finish
+        # @see Hanami2::Action#finish
         def finish(_, res, _)
           unless res.headers.include?(Action::CACHE_CONTROL)
             res.headers.merge!(self.class.cache_control_directives.headers)
@@ -64,7 +64,7 @@ module Hanami
           # @since 0.3.0
           # @api private
           def initialize(*values)
-            @directives = Hanami::Action::Cache::Directives.new(*values)
+            @directives = Hanami2::Action::Cache::Directives.new(*values)
           end
 
           # @since 0.3.0

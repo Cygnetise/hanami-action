@@ -2,7 +2,7 @@
 
 require "hanami/devtools/unit"
 
-RSpec.describe Hanami::Action do
+RSpec.describe Hanami2::Action do
   let(:action_class) { Class.new(described_class) }
   subject(:action) { action_class.new }
 
@@ -26,7 +26,7 @@ RSpec.describe Hanami::Action do
       env = {}
       action.call(env)
 
-      expect(env[Hanami::Action::ACTION_INSTANCE]).to eq(action)
+      expect(env[Hanami2::Action::ACTION_INSTANCE]).to eq(action)
     end
 
     context "when an exception isn't handled" do
@@ -88,30 +88,30 @@ RSpec.describe Hanami::Action do
 
     context "when setting res.session with sessions disabled" do
       it "raises an informative exception" do
-        expected = Hanami::Action::MissingSessionError
+        expected = Hanami2::Action::MissingSessionError
         expect { MissingResponseSessionAction.new.call({}) }.to raise_error(
           expected,
-          /Hanami::Action::Response#session/
+          /Hanami2::Action::Response#session/
         )
       end
     end
 
     context "when setting res.flash with sessions disabled" do
       it "raises an informative exception" do
-        expected = Hanami::Action::MissingSessionError
+        expected = Hanami2::Action::MissingSessionError
         expect { MissingResponseFlashAction.new.call({}) }.to raise_error(
           expected,
-          /Hanami::Action::Response#flash/
+          /Hanami2::Action::Response#flash/
         )
       end
     end
 
     context "when accessing req.session with sessions disabled" do
       it "raises an informative exception" do
-        expected = Hanami::Action::MissingSessionError
+        expected = Hanami2::Action::MissingSessionError
         expect { MissingRequestSessionAction.new.call({}) }.to raise_error(
           expected,
-          /Hanami::Action::Request#session/
+          /Hanami2::Action::Request#session/
         )
       end
     end
@@ -119,7 +119,7 @@ RSpec.describe Hanami::Action do
 
   describe "request" do
     it "gets a Rack-like request object" do
-      action_class = Class.new(Hanami::Action) do
+      action_class = Class.new(Hanami2::Action) do
         def handle(req, res)
           res[:request] = req
         end

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# The Hanami::Action::Flash implementation is derived from Roda's FlashHash, also released under the
+# The Hanami2::Action::Flash implementation is derived from Roda's FlashHash, also released under the
 # MIT Licence:
 #
 # Copyright (c) 2014-2020 Jeremy Evans
 # Copyright (c) 2010-2014 Michel Martens, Damian Janowski and Cyril David
 # Copyright (c) 2008-2009 Christian Neukirchen
 
-module Hanami
+module Hanami2
   class Action
     # A container to transport data with the HTTP session, with a lifespan of just one HTTP request
     # or redirect.

@@ -5,7 +5,7 @@ require "rack/utils"
 require "securerandom"
 require_relative "errors"
 
-module Hanami
+module Hanami2
   # @api private
   class Action
     # CSRF Protection
@@ -18,7 +18,7 @@ module Hanami
     #
     # If the param matches with the challenge token, the flow can continue.
     # Otherwise the application detects an attack attempt, it reset the session
-    # and <tt>Hanami::Action::InvalidCSRFTokenError</tt> is raised.
+    # and <tt>Hanami2::Action::InvalidCSRFTokenError</tt> is raised.
     #
     # We can specify a custom handling strategy, by overriding <tt>#handle_invalid_csrf_token</tt>.
     #
@@ -90,7 +90,7 @@ module Hanami
       # @api private
       def self.included(action)
         unless Hanami.respond_to?(:env?) && Hanami.env?(:test)
-          action.include Hanami::Action::Session
+          action.include Hanami2::Action::Session
           action.class_eval do
             before :set_csrf_token, :verify_csrf_token
           end
@@ -179,7 +179,7 @@ module Hanami
       #
       # Override this method, for custom handling.
       #
-      # @raise [Hanami::Action::InvalidCSRFTokenError]
+      # @raise [Hanami2::Action::InvalidCSRFTokenError]
       #
       # @since 0.4.0
       #

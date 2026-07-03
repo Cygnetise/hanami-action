@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Response, "session features" do
+RSpec.describe Hanami2::Action::Response, "session features" do
   subject(:response) {
     described_class.new(
       env: rack_env,
       request: request,
-      config: Hanami::Action.config.dup,
+      config: Hanami2::Action.config.dup,
       session_enabled: true
     )
   }
   let(:request) {
-    Hanami::Action::Request.new(env: rack_env, params: {}, session_enabled: true)
+    Hanami2::Action::Request.new(env: rack_env, params: {}, session_enabled: true)
   }
   let(:rack_env) {
     Rack::MockRequest.env_for("http://example.com/foo?q=bar")

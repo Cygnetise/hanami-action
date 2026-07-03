@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     # Cookies API
     #
@@ -8,7 +8,7 @@ module Hanami
     #
     # @since 0.1.0
     #
-    # @see Hanami::Action::Cookies#cookies
+    # @see Hanami2::Action::Cookies#cookies
     module Cookies
       private
 
@@ -17,7 +17,7 @@ module Hanami
       # @since 0.1.0
       # @api private
       #
-      # @see Hanami::Action#finish
+      # @see Hanami2::Action#finish
       def finish(req, res, *)
         res.cookies.finish
         super

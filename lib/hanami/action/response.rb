@@ -5,7 +5,7 @@ require "rack/response"
 require "hanami/utils/kernel"
 require_relative "errors"
 
-module Hanami
+module Hanami2
   class Action
     # The HTTP response for an action, given to {Action#handle}.
     #
@@ -87,7 +87,7 @@ module Hanami
       # @since 2.0.2
       # @api public
       #
-      # @raise [Hanami::Action::UnknownHttpStatusError] if the given code
+      # @raise [Hanami2::Action::UnknownHttpStatusError] if the given code
       #   cannot be associated to a known HTTP status
       #
       # @example
@@ -103,7 +103,7 @@ module Hanami
 
       # Sets the response body from the rendered view.
       #
-      # @param view [Hanami::View] the view to render
+      # @param view [Hanami2::View] the view to render
       # @param input [Hash] keyword arguments to pass to the view's `#call` method
       #
       # @api public
@@ -139,7 +139,7 @@ module Hanami
       # Either a format name (`:json`) or a MIME type (`"application/json"`) may be given. In either
       # case, the format or content type will be derived from the given value, and both will be set.
       #
-      # Providing an unknown format name will raise an {Hanami::Action::UnknownFormatError}.
+      # Providing an unknown format name will raise an {Hanami2::Action::UnknownFormatError}.
       #
       # Providing an unknown MIME type will set the content type and set the format as nil.
       #
@@ -155,7 +155,7 @@ module Hanami
       #
       # @param value [Symbol, String] the format name or content type
       #
-      # @raise [Hanami::Action::UnknownFormatError] if an unknown format name is given
+      # @raise [Hanami2::Action::UnknownFormatError] if an unknown format name is given
       #
       # @see Config#formats
       #
@@ -220,7 +220,7 @@ module Hanami
       # @api public
       def session
         unless session_enabled?
-          raise Hanami::Action::MissingSessionError.new("Hanami::Action::Response#session")
+          raise Hanami2::Action::MissingSessionError.new("Hanami2::Action::Response#session")
         end
 
         request.session
@@ -240,7 +240,7 @@ module Hanami
       # @api public
       def flash
         unless session_enabled?
-          raise Hanami::Action::MissingSessionError.new("Hanami::Action::Response#flash")
+          raise Hanami2::Action::MissingSessionError.new("Hanami2::Action::Response#flash")
         end
 
         request.flash
@@ -284,8 +284,8 @@ module Hanami
       #
       # @return [void]
       #
-      # @see Hanami::Action::Config#public_directory
-      # @see Hanami::Action::Rack::File
+      # @see Hanami2::Action::Config#public_directory
+      # @see Hanami2::Action::Rack::File
       #
       # @since 2.0.0
       # @api public
@@ -302,7 +302,7 @@ module Hanami
       # @return [void]
       #
       # @see #send_file
-      # @see Hanami::Action::Rack::File
+      # @see Hanami2::Action::Rack::File
       #
       # @since 2.0.0
       # @api public

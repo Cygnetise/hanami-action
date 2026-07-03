@@ -43,10 +43,10 @@ RSpec.describe "Flash application" do
   end
 
   context "when sessions not enabled" do
-    it "raises Hanami::Action::MissingSessionError" do
+    it "raises Hanami2::Action::MissingSessionError" do
       expect { get "/disabled" }.to raise_error(
-        Hanami::Action::MissingSessionError,
-        /Hanami::Action::Response#flash/
+        Hanami2::Action::MissingSessionError,
+        /Hanami2::Action::Response#flash/
       )
     end
   end

@@ -2,7 +2,7 @@
 
 require "hanami/utils/blank"
 
-module Hanami
+module Hanami2
   class Action
     module Cache
       # ETag value object

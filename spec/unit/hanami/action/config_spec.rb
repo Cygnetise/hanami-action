@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Config do
-  subject(:config) { Class.new(Hanami::Action).config }
+RSpec.describe Hanami2::Action::Config do
+  subject(:config) { Class.new(Hanami2::Action).config }
 
   describe "#handled_exceptions" do
     it "is an empty hash by default" do

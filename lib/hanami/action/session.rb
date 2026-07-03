@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hanami
+module Hanami2
   class Action
     # Session support for actions.
     #
@@ -32,7 +32,7 @@ module Hanami
       # @since 0.3.0
       # @api private
       #
-      # @see Hanami::Action#finish
+      # @see Hanami2::Action#finish
       def finish(req, res, *)
         if (next_flash = res.flash.next).any?
           res.session[Flash::KEY] = next_flash

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Action::Config::Formats do
+RSpec.describe Hanami2::Action::Config::Formats do
   subject(:formats) { described_class.new }
 
   describe "#mapping" do

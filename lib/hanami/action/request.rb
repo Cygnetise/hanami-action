@@ -6,7 +6,7 @@ require "rack/utils"
 require "securerandom"
 require_relative "errors"
 
-module Hanami
+module Hanami2
   class Action
     # The HTTP request for an action, given to {Action#handle}.
     #
@@ -67,7 +67,7 @@ module Hanami
       # @api public
       def session
         unless session_enabled?
-          raise Hanami::Action::MissingSessionError.new("Hanami::Action::Request#session")
+          raise Hanami2::Action::MissingSessionError.new("Hanami2::Action::Request#session")
         end
 
         super
@@ -85,7 +85,7 @@ module Hanami
       # @api public
       def flash
         unless session_enabled?
-          raise Hanami::Action::MissingSessionError.new("Hanami::Action::Request#flash")
+          raise Hanami2::Action::MissingSessionError.new("Hanami2::Action::Request#flash")
         end
 
         @flash ||= Flash.new(session[Flash::KEY])
