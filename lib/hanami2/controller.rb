@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "hanami/action"
-require "hanami/controller/version"
+require "hanami2/controller/version"
 
 # Hanami
 #

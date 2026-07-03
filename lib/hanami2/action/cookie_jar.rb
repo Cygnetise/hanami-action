@@ -96,7 +96,7 @@ module Hanami2
       # @since 1.1.0
       #
       # @example
-      #   require "hanami/controller"
+      #   require "hanami2/controller"
       #   class MyAction < Hanami2::Action
       #     include Hanami2::Action::Cookies
       #

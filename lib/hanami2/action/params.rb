@@ -74,7 +74,7 @@ module Hanami2
         # @since 1.1.0
         #
         # @example Basic usage
-        #   require "hanami/controller"
+        #   require "hanami2/controller"
         #
         #   class MyAction < Hanami2::Action
         #     params do
@@ -95,7 +95,7 @@ module Hanami2
         #   end
         #
         # @example Invalid argument
-        #   require "hanami/controller"
+        #   require "hanami2/controller"
         #
         #   class MyAction < Hanami2::Action
         #     params do
@@ -232,7 +232,7 @@ module Hanami2
       # @return [Object,NilClass] return the associated value, if found
       #
       # @example
-      #   require "hanami/controller"
+      #   require "hanami2/controller"
       #
       #   module Deliveries
       #     class Create < Hanami2::Action

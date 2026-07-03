@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative "hanami/controller"
+require_relative "hanami2/controller"

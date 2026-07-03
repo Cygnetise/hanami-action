@@ -18,7 +18,7 @@ module Hanami2
   # @since 0.1.0
   #
   # @example
-  #   require "hanami/controller"
+  #   require "hanami2/controller"
   #
   #   class Show < Hanami2::Action
   #     def handle(req, res)
@@ -149,7 +149,7 @@ module Hanami2
     #   @see Hanami2::Action::Callbacks::ClassMethods#append_after
     #
     #   @example Method names (symbols)
-    #     require "hanami/controller"
+    #     require "hanami2/controller"
     #
     #     class Show < Hanami2::Action
     #       before :authenticate, :set_article
@@ -175,7 +175,7 @@ module Hanami2
     #     # 3. #call
     #
     #   @example Anonymous functions (Procs)
-    #     require "hanami/controller"
+    #     require "hanami2/controller"
     #
     #     class Show < Hanami2::Action
     #       before { ... } # 1 do some authentication stuff
@@ -371,7 +371,7 @@ module Hanami2
     # @see Hanami2::Http::Status:ALL
     #
     # @example Basic usage
-    #   require "hanami/controller"
+    #   require "hanami2/controller"
     #
     #   class Show < Hanami2::Action
     #     def handle(*)
@@ -382,7 +382,7 @@ module Hanami2
     #   # => [404, {}, ["Not Found"]]
     #
     # @example Custom message
-    #   require "hanami/controller"
+    #   require "hanami2/controller"
     #
     #   class Show < Hanami2::Action
     #     def handle(*)
@@ -530,7 +530,7 @@ module Hanami2
     # @see Hanami2::Action#_requires_no_body?
     #
     # @example
-    #   require "hanami/controller"
+    #   require "hanami2/controller"
     #
     #   module Books
     #     class Destroy < Hanami2::Action

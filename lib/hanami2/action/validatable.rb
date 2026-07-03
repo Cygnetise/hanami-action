@@ -52,7 +52,7 @@ module Hanami2
         # @see https://dry-rb.org/gems/dry-validation/
         #
         # @example Inline definition
-        #   require "hanami/controller"
+        #   require "hanami2/controller"
         #
         #   class Signup < Hanami2::Action
         #     params do
@@ -71,7 +71,7 @@ module Hanami2
         #   end
         #
         # @example Concrete class
-        #   require "hanami/controller"
+        #   require "hanami2/controller"
         #
         #   class SignupParams < Hanami2::Action::Params
         #     params do
@@ -134,7 +134,7 @@ module Hanami2
         # @see https://dry-rb.org/gems/dry-validation/
         #
         # @example Inline definition
-        #   require "hanami/controller"
+        #   require "hanami2/controller"
         #
         #   class Signup < Hanami2::Action
         #     contract do
@@ -159,7 +159,7 @@ module Hanami2
         #   end
         #
         # @example Concrete class
-        #   require "hanami/controller"
+        #   require "hanami2/controller"
         #
         #   class SignupParams < Hanami2::Action::Params
         #     contract do
